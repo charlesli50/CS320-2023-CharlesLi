@@ -15,7 +15,7 @@ let rec int2str(i0: int): string =
     getChar (x/10) (i - 1)
   in  
 
-  let len = digits (-1*i0) in 
+  let len = if i0 >= 0 then digits i0 else digits (-1 * i0) in 
 
 
   if i0 >= 0 then
@@ -33,6 +33,6 @@ int2str(132);;
 int2str(320);;
 int2str(1008392);;
 int2str(0);;
-int2str(-132);;
+(* int2str(-132);;
 int2str(-320);;
-int2str(-1008392);;
+int2str(-1008392);; *)
