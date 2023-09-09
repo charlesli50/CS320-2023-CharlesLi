@@ -20,7 +20,7 @@ if fact(x) = 0 then x else myloop(x+1)
 
 (* ****** ****** *)
 
-myloop(1);;
+let myans = myloop(1);;
 
 
 (* end of [CS320-2023-Fall-assign0-1.ml] *)
