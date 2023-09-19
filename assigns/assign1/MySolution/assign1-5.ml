@@ -6,10 +6,11 @@
 
 let string_longest_ascend (xs:string): string =
   (* let prevChar = string_get_at(0) in *)
+  (* if char is greater than previous character, true, else false *)
 
   let ascend (c:char): bool = 
   true in 
-      (* if char is greater than previous character, true, else false *)
+
 string_make_fwork (fun(work) -> 
   string_foreach cs 
   (fun char -> if (

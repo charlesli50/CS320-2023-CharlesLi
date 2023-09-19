@@ -3,7 +3,7 @@
 
 #use "./../../../classlib/OCaml/MyOCaml.ml";;
 
-(* let intrep_add (ds1:string) (ds2 :string): string = 
+let intrep_add (ds1:string) (ds2 :string): string = 
 
   let
   str2int(cs: string): int =
@@ -17,9 +17,9 @@
   string_rmake_fwork(foreach(n0))
   in
 int2str ( str2int(ds1) + str2int(ds2) )
-;; *)
+;;
 
-let intrep_add (ds1:string) (ds2 :string): string = 
+(* let intrep_add (ds1:string) (ds2 :string): string = 
   let
   stringrev(cs:string): string =
   string_make_fwork(string_rforeach(cs)) in
@@ -28,5 +28,5 @@ let intrep_add (ds1:string) (ds2 :string): string =
 
   (* the carry bit = a char, you can just add to  *)
 
-;;
+;; *)
 intrep_add("1116123") ("222987");;
