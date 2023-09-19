@@ -4,7 +4,7 @@
 #use "./../../../classlib/OCaml/MyOCaml.ml";;
 
 
-let string_avoid_132(cs:string): bool =
+let string_avoid_1324(cs:string): bool =
   (* if starts out decreasing, then  *)
   (* if it becomes smaller than the one compared to, pass that in *)
   (* int1_foreach(n0:int) (string_get_at(cs) (n0)) *)
