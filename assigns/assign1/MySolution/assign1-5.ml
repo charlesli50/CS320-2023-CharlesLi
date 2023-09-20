@@ -11,9 +11,9 @@ let string_longest_ascend (xs:string): string =
   let ascend (c:char): bool = 
   true in 
 
-string_make_fwork (fun(work) -> 
-  string_foreach cs 
-  (fun char -> if (
-    ascend(char) then work(char) )
+  string_make_fwork (fun work -> 
+    string_foreach cs 
+    (fun char -> if 
+      ascend(char) then work(char) 
 ;;
 
