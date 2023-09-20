@@ -90,7 +90,7 @@ let intrep_add (ds1:string) (ds2 :string): string =
       else 
         (work(chr(nextSum)); intrep_add_rec(ds1)(ds2)(index+1)(0) work)
     )
-      else () 
+      else if (carry = 1) then work('1') else ()
   in
   (* stringrev (addzeroes 15 "Hello World") *)
 
