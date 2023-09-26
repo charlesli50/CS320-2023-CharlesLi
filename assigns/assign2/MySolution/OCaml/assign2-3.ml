@@ -4,11 +4,10 @@
 #use "./../../../../classlib/OCaml/MyOCaml.ml";;
 #use "./../../assign2.ml";;
 
+
 let foldleft_to_iforeach(foldleft: ('xs, 'x0, int) foldleft): ('xs, 'x0) iforeach = 
-  (* fun (xs work) -> 
-  let _ = foldleft 0 (fun (idx) (x0) -> ((work(idx)(x0)); idx + 1))
-  in () *)
-
-  fun(xs)(work) -> let _ = foldleft 0 (fun (idx)(x0) -> (work(idx)(x0); idx+1)) in ()
+(* let foldleft_to_iforeach(foldleft: ('xs, 'x0, int) foldleft): ('xs, 'x0) iforeach =  *)
+  fun xs work -> 
+    let _ = foldleft xs 0 (fun idx x0 -> (work(idx)(x0); idx+1)) in 
+    ()
 ;;
-
