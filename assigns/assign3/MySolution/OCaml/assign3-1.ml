@@ -3,9 +3,27 @@
 
 #use "./../../../../classlib/OCaml/MyOCaml.ml";;
 
+let rec get_head(xss): 'a list = 
+  match xss with
+  | [] -> []
+  | [] :: _ -> []
+  | (x :: _) :: rest -> x :: get_head rest
+
+let rec get_tail(xss): 'a list = 
+  match xss with
+  | [] -> []
+  | [] :: _ -> []
+  | (_ :: x) :: rest -> x :: get_tail rest
+
 let rec 
-matrix_transpose(xss: 'a list list): 'a list list = 
- 
+matrix_transpose(xss: 'a list list): 'a list list =
+  match xss with
+  | [] -> []
+  | [] :: _ -> []
+  | _ -> let row_head = get_head(xss) in 
+         let row_tail = get_tail(xss) in
+         row_head :: matrix_transpose row_tail
+
 ;;
 
 

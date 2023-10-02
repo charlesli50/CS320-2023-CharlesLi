@@ -33,8 +33,6 @@ list_foldleft(subsets)([])(fun (r0)(x0) ->
   if (check_if_nlength(x0)) then list_append(r0)([x0]) else r0
 )
 
-(* filter test work *)
-(* list_make_filter(check_if_nlength)(fun work -> list_foreach(subsets)(fun curVal -> work(curVal))) *)
 ;;
 
 let sub = list_subsets([1;2;3;4;5]);;
