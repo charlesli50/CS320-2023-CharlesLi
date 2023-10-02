@@ -3,7 +3,7 @@
 
 #use "./../../../../classlib/OCaml/MyOCaml.ml";;
 
-let rec
+let
 list_subsets
 (xs: 'a list): 'a list list =
   let list_map = fun xs -> foreach_to_map_list(list_foreach)(xs)
@@ -15,3 +15,6 @@ list_foldleft(xs)([[]])(fun(r0)(x0) ->
   list_append(r0)(newset)
   )
 ;; 
+
+(* let xs = [1;2;3;4;5];; *)
+let sub = list_subsets([1;2;3;4;5]);;
