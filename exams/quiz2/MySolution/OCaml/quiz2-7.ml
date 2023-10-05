@@ -19,17 +19,13 @@ match xs with
 
 #use "./../../../../classlib/OCaml/MyOCaml.ml";;
 
-let list_append(xs: 'a list)(ys: 'a list): 'a list =
-let new_xs = list_reverse(xs) in
-let reversed = 
 
-list_foldleft(ys)(new_xs)(fun acc x -> 
-   (* acc :: x *)
-   match acc with 
-   | [] ->  ys
-   | acc -> x :: acc
-  ) in
+let rec
+list_append(xs: 'a list)(ys: 'a list) =
+match xs with
+  | [] -> ys 
+  | x1 :: xs -> list_foldleft(ys)(xs)(fun acc x -> 
+    x1 :: list_append(xs)(ys)
+    );;
 
-list_reverse (reversed)
-
-;;
+let s = list_append([1;2;3;4;5]) ([6;7;8;9]);;
