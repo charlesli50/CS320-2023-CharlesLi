@@ -33,5 +33,3 @@ list_foldleft(ys)(new_xs)(fun acc x ->
 list_reverse (reversed)
 
 ;;
-
-let res = list_append [1;2;3] [4;5;6];;

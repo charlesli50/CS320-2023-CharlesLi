@@ -20,6 +20,3 @@ match xs with
     if acc = -1 then x0 else acc
   )
 ;;
-
-let s = list_last([5;2;3;5;4;5]);;
-let st = list_last([5;4;3;2;1]);;
