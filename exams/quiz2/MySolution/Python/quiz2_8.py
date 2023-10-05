@@ -19,5 +19,31 @@
 #
 # *)
 
-def foreach_to_get_at(foreach): # your implementation below
+  # lambda(xs, i):
+  #   foreach(xs, lambda x: 
+  #     curr_i = 0
+  #     if(curr_i == i):
+  #       return x
+  #     else:
+  #       curr_i += 1
+  #     )
 
+def foreach(lst, work):
+  for val in lst: 
+    work(val)
+
+def foreach_to_get_at(foreach): # your implementation below
+  def get_at_func(xs, i):
+    curr_1 = 0
+    def work(x):
+      print(x)
+      if curr_1 == i:
+        return x
+      else:
+        curr_1+=1
+
+    foreach(xs, lambda x:(
+      work(x)
+    ))
+
+foreach_to_get_at(foreach([1,2,3], 2))
