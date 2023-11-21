@@ -125,97 +125,97 @@ let interp (s: string) =
 			(match c with 
 			| Push ct -> evaluate(ct :: stack)(trace)(rest)
 			| Pop -> (if array_len stack = 0 then
-				(evaluate(stack)("Panic at Pop" :: trace)([])) else (
+				(evaluate(stack)("Panic" :: trace)([])) else (
 					match stack with
 					| _ :: st -> evaluate(st)(trace)(rest)
 					| [] -> None
 				))
 			| Trace -> (if array_len stack = 0 then
-				(evaluate(stack)("Panic at Pop" :: trace)([])) else (
+				(evaluate(stack)("Panic" :: trace)([])) else (
 					match stack with
 					| top :: st -> evaluate((Unit ()) :: st)(const_to_string (top) :: trace)(rest)
 					| [] -> None
 				))
 			| Add -> (if array_len stack < 2 then
-				(evaluate(stack)("Panic at Add" :: trace)([])) else (
+				(evaluate(stack)("Panic" :: trace)([])) else (
 					match stack with
 					| i :: j :: st -> 
 						(match i, j with
 						| (Int i, Int j) -> evaluate( Int (i + j) :: st)(trace)(rest)
-						| _, _ -> (evaluate(stack)("Panic at Add" :: trace)([])))
+						| _, _ -> (evaluate(stack)("Panic" :: trace)([])))
 					| [] -> None
 				))
 			| Sub -> (if array_len stack < 2 then
-				(evaluate(stack)("Panic at Sub" :: trace)([])) else (
+				(evaluate(stack)("Panic" :: trace)([])) else (
 					match stack with
 					| i :: j :: st -> 
 						(match i, j with
 						| (Int i, Int j) -> evaluate( Int (i - j) :: st)(trace)(rest)
-						| _, _ -> (evaluate(stack)("Panic at Sub" :: trace)([])))
+						| _, _ -> (evaluate(stack)("Panic" :: trace)([])))
 					| [] -> None
 				))
 			| Mul -> (if array_len stack < 2 then
-				(evaluate(stack)("Panic at Mul" :: trace)([])) else (
+				(evaluate(stack)("Panic" :: trace)([])) else (
 					match stack with
 					| i :: j :: st -> 
 						(match i, j with
 						| (Int i, Int j) -> evaluate( Int (i * j) :: st)(trace)(rest)
-						| _, _ -> (evaluate(stack)("Panic at Mul" :: trace)([])))
+						| _, _ -> (evaluate(stack)("Panic" :: trace)([])))
 					| [] -> None
 				))
 			| Div -> (if array_len stack < 2 then
-				(evaluate(stack)("Panic at Div" :: trace)([])) else (
+				(evaluate(stack)("Panic" :: trace)([])) else (
 					match stack with
 					| i :: j :: st -> 
 						(match i, j with
-						| (Int _, Int 0) -> (evaluate(stack)("Panic at Div" :: trace)([]))
+						| (Int _, Int 0) -> (evaluate(stack)("Panic" :: trace)([]))
 						| (Int i, Int j) -> evaluate( Int (i / j) :: st)(trace)(rest)
-						| _, _ -> (evaluate(stack)("Panic at Div" :: trace)([])))
+						| _, _ -> (evaluate(stack)("Panic" :: trace)([])))
 					| [] -> None
 				))
 			| And -> (if array_len stack < 2 then
-				(evaluate(stack)("Panic at And" :: trace)([])) else (
+				(evaluate(stack)("Panic" :: trace)([])) else (
 					match stack with
 					| i :: j :: st -> 
 						(match i, j with
 						| (Bool i, Bool j) -> evaluate( Bool (i && j) :: st)(trace)(rest)
-						| _, _ -> (evaluate(stack)("Panic at And" :: trace)([])))
+						| _, _ -> (evaluate(stack)("Panic" :: trace)([])))
 					| [] -> None
 				))
 			| Or -> (if array_len stack < 2 then
-				(evaluate(stack)("Panic at Or" :: trace)([])) else (
+				(evaluate(stack)("Panic" :: trace)([])) else (
 					match stack with
 					| i :: j :: st -> 
 						(match i, j with
 						| (Bool i, Bool j) -> evaluate( Bool (i || j) :: st)(trace)(rest)
-						| _, _ -> (evaluate(stack)("Panic at Or" :: trace)([])))
+						| _, _ -> (evaluate(stack)("Panic" :: trace)([])))
 					| [] -> None
 				))
 			| Not -> (if array_len stack < 1 then
-				(evaluate(stack)("Panic at And" :: trace)([])) else (
+				(evaluate(stack)("Panic" :: trace)([])) else (
 					match stack with
 					| i :: st -> 
 						(match i with
 						| Bool i -> evaluate( Bool (not i) :: st)(trace)(rest)
-						| _ -> (evaluate(stack)("Panic at And" :: trace)([])))
+						| _ -> (evaluate(stack)("Panic" :: trace)([])))
 					| [] -> None
 				))
 			| Lt -> (if array_len stack < 2 then
-				(evaluate(stack)("Panic at Lt" :: trace)([])) else (
+				(evaluate(stack)("Panic" :: trace)([])) else (
 					match stack with
 					| i :: j :: st -> 
 						(match i, j with
 						| (Int i, Int j) -> evaluate( Bool (i < j) :: st)(trace)(rest)
-						| _, _ -> (evaluate(stack)("Panic at Lt" :: trace)([])))
+						| _, _ -> (evaluate(stack)("Panic" :: trace)([])))
 					| [] -> None
 				))
 			| Gt -> (if array_len stack < 2 then
-				(evaluate(stack)("Panic at Gt" :: trace)([])) else (
+				(evaluate(stack)("Panic" :: trace)([])) else (
 					match stack with
 					| i :: j :: st -> 
 						(match i, j with
 						| (Int i, Int j) -> evaluate( Bool (i > j) :: st)(trace)(rest)
-						| _, _ -> (evaluate(stack)("Panic at Gt" :: trace)([])))
+						| _, _ -> (evaluate(stack)("Panic" :: trace)([])))
 					| [] -> None
 				))
 			)
