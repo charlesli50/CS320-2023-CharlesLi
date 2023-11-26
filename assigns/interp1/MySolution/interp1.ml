@@ -71,7 +71,9 @@ match const with
 (* | _ -> "what" *)
 
 let rec parse_prog(prog: com list) =
-	(let* _ = keyword "Push" in
+	(
+  let* _ = whitespaces in
+  let* _ = keyword "Push" in
 	let* _ = whitespaces in
 	let* c = parse_const  () in
 	(* let _ = print_string (const_to_string c) in  *)
@@ -220,9 +222,7 @@ let interp (s: string) =
 				))
 			)
 		| [] -> Some trace
-
 		in
-
 	match string_parse_c (parse_prog []) s with 
 	| Some (e, []) -> evaluate([])([])(e) 
 	| _ -> None  
