@@ -21,10 +21,6 @@ type com =
   | And | Or | Not
   | Lt | Gt
 
-(* type coms =
-  | Empty
-  | Coms of com * coms *)
-
 let parse_const () : const parser = 
 	(let* _ = char '-' in
 	let* x = natural in pure  (Int (-x)))
@@ -61,14 +57,12 @@ let rec int2str(i0: int): string =
 			else 
 			string_init (len + 1) (fun i -> if i = 0 then '-' else getChar i0 (len-i))
 		
-
 let const_to_string(const): string = 
 match const with
 | Int n -> int2str n
 | Bool true -> "True"
 | Bool false -> "False"
 | Unit _ -> "Unit"
-(* | _ -> "what" *)
 
 let rec parse_prog(prog: com list) =
 	(
@@ -118,7 +112,6 @@ let rec parse_prog(prog: com list) =
 
 let string_parse_c(p: 'a parser)(s: string) =
   p(string_listize(s))
-;;
 
 let interp (s: string) = 
 	let rec evaluate(stack: const list)(trace: string list)(prog: com list) = 
