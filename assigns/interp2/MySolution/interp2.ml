@@ -227,13 +227,14 @@ let interp (s: string) : string list option =
        | _ :: []              (* GtError3 *) -> evaluate [] ("Panic" :: t) v [])
     | IfElse (c1, c2) :: p0 ->       
       (match s with 
-        | Bool b :: s0 -> if b = true then  evaluate s t v (list_append c1 p0) else evaluate s t v (list_append c2 p0)
+        | Bool b :: s0 -> if b  then        evaluate s0 t v (list_append c1 p0) else evaluate s0 t v (list_append c2 p0)
         | _ :: s0      ->                   evaluate [] ("Panic" :: t) v []
         | []           ->                   evaluate [] ("Panic" :: t) v []
       )
     | Bind :: p0 -> 
       (match s with 
-        | Sym x :: var :: s0 ->             evaluate s0 t (((Sym x), var) :: v) p0
+        | Sym x :: v0 :: s0 ->              evaluate s0 t (((Sym x), v0) :: v) p0
+        | _ :: _ :: s0      ->              evaluate [] ("Panic" :: t) v []
         | _ :: s0      ->                   evaluate [] ("Panic" :: t) v []
         | []           ->                   evaluate [] ("Panic" :: t) v []
       )
