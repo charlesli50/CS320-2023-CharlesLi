@@ -234,36 +234,36 @@ let interp (s: string) : string list option =
     | Bind :: p0 -> 
       (match s with 
         | Sym x :: var :: s0 ->             evaluate s0 t (((Sym x), var) :: v) p0
-        | _ :: s0      ->                   evaluate [] ("Panic at bind" :: t) v []
-        | []           ->                   evaluate [] ("Panic at bind" :: t) v []
+        | _ :: s0      ->                   evaluate [] ("Panic" :: t) v []
+        | []           ->                   evaluate [] ("Panic" :: t) v []
       )
     | Lookup :: p0 -> 
       (match s with 
         | Sym x :: s0 ->  (match (lookup (Sym(x)) v) with
           | Some (value) ->                evaluate (value :: s0) t v p0 
-          | None         ->                evaluate [] ("Panic at Lookup" :: t) v [])
-        | _ :: s0        ->                evaluate [] ("Panic at Lookup" :: t) v []
-        | []             ->                evaluate [] ("Panic at Lookup" :: t) v []     
+          | None         ->                evaluate [] ("Panic" :: t) v [])
+        | _ :: s0        ->                evaluate [] ("Panic" :: t) v []
+        | []             ->                evaluate [] ("Panic" :: t) v []     
       )
     | Fun c :: p0 -> 
       (match s with 
         | Sym x :: s0    ->                evaluate ((Closure (Sym x, v, c)) :: s0) t v p0
-        | _ :: s0        ->                evaluate [] ("Panic at Fun" :: t) v []
-        | []             ->                evaluate [] ("Panic at Fun" :: t) v []     
+        | _ :: s0        ->                evaluate [] ("Panic" :: t) v []
+        | []             ->                evaluate [] ("Panic" :: t) v []     
       )
     | Call :: p0 -> 
       (match s with 
         | Closure (f, vf, c) :: a :: s0 ->        evaluate (a :: (Closure (Sym "cc", v, p0) :: s0)) t ((f, Closure(f, vf, c)) :: vf) c
-        | _ :: _ :: s0        ->                  evaluate [] ("Panic at Call" :: t) v []
-        | _ :: s0             ->                  evaluate [] ("Panic at Call" :: t) v []
-        | []                  ->                  evaluate [] ("Panic at Call" :: t) v [] 
+        | _ :: _ :: s0        ->                  evaluate [] ("Panic" :: t) v []
+        | _ :: s0             ->                  evaluate [] ("Panic" :: t) v []
+        | []                  ->                  evaluate [] ("Panic" :: t) v [] 
       )
     | Return :: p0 -> 
       (match s with 
         | Closure(f, vf, c) :: a :: s0 ->       evaluate (a :: s0) t vf c
-        | _ :: _ :: s0        ->                evaluate [] ("Panic at Return" :: t) v []
-        | _ :: s0             ->                evaluate [] ("Panic at Return" :: t) v []
-        | []                  ->                evaluate [] ("Panic at Return" :: t) v []    
+        | _ :: _ :: s0        ->                evaluate [] ("Panic" :: t) v []
+        | _ :: s0             ->                evaluate [] ("Panic" :: t) v []
+        | []                  ->                evaluate [] ("Panic" :: t) v []    
       )
     in
 	match string_parse_c (parse_prog) s with 
