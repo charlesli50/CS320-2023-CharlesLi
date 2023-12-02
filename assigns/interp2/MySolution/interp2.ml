@@ -109,6 +109,7 @@ match const with
 | Bool false -> "False"
 | Unit -> "Unit"
 | Sym str -> str
+| Closure (Sym str, _, _) -> string_append (string_append "Fun<" str) (">")
 
 let rec parse_com() = 
   (keyword "Push" >> parse_const >>= fun c -> pure (Push c)) <|>
