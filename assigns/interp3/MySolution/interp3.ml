@@ -369,7 +369,8 @@ let compile (s : string) : string = (* YOUR CODE *)
                           | Sub -> string_concat_list [compiler_helper(m); compiler_helper(n); "Swap; "; "Sub; "]
                           | Mul -> string_concat_list [compiler_helper(m); compiler_helper(n); "Swap; "; "Mul; "]
                           | Div -> string_concat_list [compiler_helper(m); compiler_helper(n); "Swap; "; "Div; "]
-                          | Mod -> string_concat_list [compiler_helper(m); compiler_helper(n); compiler_helper(m); compiler_helper(n); "Swap; "; "Div; "; "Swap; "; "Mul; "; "Swap; "; "Sub; "]
+                          (* | Mod -> string_concat_list [compiler_helper(m); compiler_helper(n); compiler_helper(m); compiler_helper(n); "Swap; "; "Div; "; "Swap; "; "Mul; "; "Swap; "; "Sub; "] *)
+                          | Mod -> string_concat_list [compiler_helper(m); compiler_helper(n); "Swap; "; "Div; "; compiler_helper(n); "Mul; "; compiler_helper(m); "Sub; "]
                           | And -> string_concat_list [compiler_helper(m); compiler_helper(n); "Swap; "; "And; "]
                           | Or -> string_concat_list [compiler_helper(m); compiler_helper(n); "Swap; "; "Or; "]
                           | Lt -> string_concat_list [compiler_helper(m); compiler_helper(n); "Swap; "; "Lt; "]
@@ -377,7 +378,7 @@ let compile (s : string) : string = (* YOUR CODE *)
 
                           | Lte -> string_concat_list [compiler_helper(m); compiler_helper(n); "Swap; "; "Gt; "; "Not; "]
                           | Gte -> string_concat_list [compiler_helper(m); compiler_helper(n); "Swap; "; "Lt; "; "Not; "]
-                          | Eq -> string_concat_list [compiler_helper(m); compiler_helper(n); "Swap; "; "Lt; "; compiler_helper(m); compiler_helper(n); "Swap; "; "Gt; "; "And;"; ]
+                          | Eq -> string_concat_list [compiler_helper(m); compiler_helper(n); "Swap; "; "Lt; "; compiler_helper(m); compiler_helper(n); "Swap; "; "Gt; "; "Or; Not;"; ]
     )
     | Var s           -> string_concat_list ["Push "; s; ";"; "Lookup;"]
     | Fun (f, x, m)   -> (let body = (match m with 
@@ -392,13 +393,11 @@ let compile (s : string) : string = (* YOUR CODE *)
     | Let (x, m, n)   -> (match m with
                           (* | Fun _ -> string_concat_list ["Push OOPY"; x; ";"; (compiler_helper(m)); "Push "; x; ";"; "Bind;"; compiler_helper(n)] *)
                           | Fun _ -> string_concat_list [(compiler_helper(m)); "Push "; x; ";"; "Bind;"; compiler_helper(n)]
-                          (* | _     -> string_concat_list [(compiler_helper(m)); "Push "; x; ";"; "Bind;"; compiler_helper(n)]) *)
                           | _     -> string_concat_list ["Push "; x; ";"; compiler_helper(m); "Swap;"; "Bind;"; compiler_helper(n)])
     | Seq (m, n)      -> (match m with 
                           | Trace x -> string_concat_list [compiler_helper(x); "Trace;"; "Pop;"; (compiler_helper(n))]
                           | _ ->       string_concat_list [compiler_helper(m); (compiler_helper(n))]
     )
-      
       (* string_concat_list [compiler_helper(m); (compiler_helper(n))] *)
     | Ifte(m, n1, n2) -> string_concat_list [compiler_helper(m); "If "; compiler_helper(n1); "Else "; compiler_helper(n2); "End; "]
     | Trace m         -> string_concat_list [compiler_helper(m); "Trace;"]
@@ -406,7 +405,7 @@ let compile (s : string) : string = (* YOUR CODE *)
   (* match parse_prog s with  match expr with *)
   compiler_helper (parse_prog s);;
 
-let temp = compile("let rec gcd a b =
+(* let temp = compile("let rec gcd a b =
   if a = 0 then b
   else gcd (b mod a) a
   in
@@ -426,4 +425,4 @@ let file = "b.txt";;
 let () =
   let oc = open_out file in 
   Printf.fprintf oc "%s\n" temp;
-  close_out oc;;
+  close_out oc;; *)
