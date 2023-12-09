@@ -377,7 +377,7 @@ let compile (s : string) : string = (* YOUR CODE *)
 
                           | Lte -> string_concat_list [compiler_helper(m); compiler_helper(n); "Swap; "; "Gt; "; "Not; "]
                           | Gte -> string_concat_list [compiler_helper(m); compiler_helper(n); "Swap; "; "Lt; "; "Not; "]
-                          | Eq -> string_concat_list [compiler_helper(m); compiler_helper(n); "Swap; "; "Lt; "; compiler_helper(m); compiler_helper(n); "Swap; "; "Gt; "; "And"; ]
+                          | Eq -> string_concat_list [compiler_helper(m); compiler_helper(n); "Swap; "; "Lt; "; compiler_helper(m); compiler_helper(n); "Swap; "; "Gt; "; "And;"; ]
     )
     | Var s           -> string_concat_list ["Push "; s; ";"; "Lookup;"]
     | Fun (f, x, m)   -> (let body = (match m with 
@@ -406,11 +406,13 @@ let compile (s : string) : string = (* YOUR CODE *)
   (* match parse_prog s with  match expr with *)
   compiler_helper (parse_prog s);;
 
-  (* let temp = compile("let eff x = trace x in
-  let foo x y z = () in
-  foo (eff 1) (eff 2) (eff 3)");;
+let temp = compile("let rec gcd a b =
+  if a = 0 then b
+  else gcd (b mod a) a
+  in
+  trace (gcd 77 11)");;
 
-interp(temp);; *)
+interp(temp);;
 (* interp(compile("let fibo x =
   let rec loop i a b =
   trace a;
@@ -419,9 +421,9 @@ interp(temp);; *)
   else a
   in loop 0 0 1
   in trace (fibo 10)"));; *)
-(* 
+
 let file = "b.txt";;
 let () =
   let oc = open_out file in 
   Printf.fprintf oc "%s\n" temp;
-  close_out oc;; *)
+  close_out oc;;
